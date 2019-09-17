@@ -1,4 +1,3 @@
-
 package servlets;
 
 import java.io.IOException;
@@ -18,7 +17,7 @@ public class AgeCalcServlet extends HttpServlet {
             throws ServletException, IOException {
         getServletContext().getRequestDispatcher("/WEB-INF/ageCalc.jsp")
                 .forward(request, response);
-        
+
     }
 
     @Override
@@ -27,25 +26,23 @@ public class AgeCalcServlet extends HttpServlet {
         String age = request.getParameter("age");
         Boolean numberCheck = true;
         int age2 = 0;
-        
-        if (age == "" || age.equals("")){
-            request.setAttribute("age", "You must enter a number"); 
-            
-        }else{
-            try{
-         age2 = Integer.parseInt(age);
-            }
-            catch(NumberFormatException e){
+
+        if (age == null || age.equals("")) {
+            request.setAttribute("age", "You must enter a number");
+
+        } else {
+            try {
+                age2 = Integer.parseInt(age);
+            } catch (NumberFormatException e) {
                 numberCheck = false;
             }
-            if(numberCheck){
-                age2++;  
-        request.setAttribute("age", age2);  
+            if (numberCheck) {
+                age2++;
+                request.setAttribute("age", age2);
+            } else {
+                request.setAttribute("age", "You must enter a number");
             }
-            else{
-                request.setAttribute("age", "You must enter a number"); 
-            }
-        
+
         }
 
         getServletContext().getRequestDispatcher("/WEB-INF/ageCalc.jsp").forward(request, response);
